@@ -1,20 +1,18 @@
-## Lab 01: Migrate Linux Servers from Hyper-V to Azure
+# Lab 01: Migrate Linux Servers from Hyper-V to Azure
 
-#### Duration: 45 minutes
+### Estimated Duration: 4 hours
 
-### Exercise 1: Migrating your apps and your data, leveraging Microsoft services and tools like Azure Migrate, the Azure Hybrid Benefit, and other tools and programs
+## Exercise 1: Migrating your apps and your data, leveraging Microsoft services and tools like Azure Migrate, the Azure Hybrid Benefit, and other tools and programs
 
 ### Task 1: Review your on-prem Hyper-V Linux Server and OSS DB
 
 In this task, you will access the Hyper-V Manager to start and connect to the redhat VM, which contains an OSS Database. You'll log into this Red Hat server, preparing it for migration to Azure using Azure Migrate.
  
-1. Go to **Start** button in the VM, search for **Hyper-V Manager** there and select it. 
-
-    > You can also open the **Hyper-v manager** by clicking on the icon that is present in the taskbar. 
+1. Select **Hyper-V Manager** from the taskbar at the bottom. 
 
     ![Screenshot of Hyper-V Manager, with the 'Hyper-V Manager' action highlighted.](Images/hyper-v-manager.png "Hyperv Manager")
      
-1. In Hyper-V Manager, select **HOSTVMS<inject key="DeploymentID" enableCopy="false" />**. You should now see the **redhat** VM and 6 other VMs that we are going to use in other HOLs.
+1. In Hyper-V Manager, select **HOSTVMS<inject key="DeploymentID" enableCopy="false" />**. You should now see the **redhat** VM and 6 other VMs present.
 
     ![Screenshot of Hyper-V Manager on the SmartHotelHost.](Images/upd-redhatnew.png "Hyper-V Manager")
      
@@ -26,30 +24,23 @@ In this task, you will access the Hyper-V Manager to start and connect to the re
 
     ![Screenshot of Hyper-V Manager showing the connect button for the Azure Migrate appliance.](Images/HOL2-EX1-T2-S4.png "Connect to AzureMigrateAppliance")
 
-1. Log into the VM with the **Administrator password**: **<inject key="SmartHotel Admin Password" />** (the login screen may pick up your local keyboard mapping, use the 'eyeball' icon to check).
+1. Log into the VM with the **Administrator password**: **<inject key="SmartHotel Admin Password" />**.
 
 1. You should be able to log in to your on-prem Redhat server hosted on Hyper-V. 
 
     ![Screenshot of the Azure Migrate appliance terms of use.](Images/redhathome.png "Desktop shortcut")
 
-1. In the next task you will be migrating the Redhat server, and the OSS Database hosted in the Red Hat VM to the Azure with the help of Azure Migrate.
-
-#### Task summary
-You successfully logged into the Red Hat VM within Hyper-V Manager, and you are now ready to migrate the server and its OSS Database to Azure using Azure Migrate in the next task.
-
 ### Task 2: Register the Hyper-V Host with Migration and modernization
 
 In this task, you will register your Hyper-V host(LabVM) with the Migration and Modernization service. This service uses Azure Site Recovery as the underlying migration engine. As part of the registration process, you will deploy the Azure Site Recovery Provider on your Hyper-V host.
+
+   > **Note:** Minimize the Redhat VM and open the **Azure Portal** from the labvm.
 
 1. If you are not logged in already, click on the Azure portal shortcut that is available on the desktop and log in with below Azure credentials.
     
     * Azure Username/Email: <inject key="AzureAdUserEmail"></inject> 
     
     * Azure Password: <inject key="AzureAdUserPassword"></inject>
-
-2. Click on **Show Portal Menu (1)** bar and select **All services (2)** in the portal's left navigation.
- 
-    ![Screenshot of the All services overview blade.](Images/Allservices1.png "All services Overview blade")
 
 3. In the search bar, search for **Azure Migrate** and select it from the suggestions to open the Azure Migrate Overview blade, as shown below. 
  
@@ -67,13 +58,13 @@ In this task, you will register your Hyper-V host(LabVM) with the Migration and 
 
    - Under **Are your machines virtualized**, select **Yes, with Hyper-V (2)**.
 
-   - Under **Target region (3)** make sure to select the **<inject key="Region"></inject>** region as same the Resource Group's region.
+   - Under **Target region (3)** select **<inject key="Region"></inject>**.
 
    - Check the **confirmation (4)** checkbox and select **Create resources (5)** to begin the deployment of the Azure Site Recovery resource used by Migration and modernization for Hyper-V migrations.
 
      ![Screenshot of the Azure portal showing the 'Discover machines' panel from Azure Migrate.](Images/03-05-2024(1).png "Discover machines - source hypervisor and target region")
 
-   Once deployment is complete, the 'Discover machines' panel should be updated with additional instructions.
+   Once the deployment is completed, the 'Discover machines' panel should be updated with additional instructions.
   
 4. Click on the **Download** link for the Hyper-V replication provider software installer to download the Azure Site Recovery provider installer.
 
@@ -83,7 +74,7 @@ In this task, you will register your Hyper-V host(LabVM) with the Migration and 
 
      ![Screenshot of the Discover machines' panel from Azure Migrate, highlighting the download link Hyper-V registration key file.](Images/upd-e3-t2-s4.png "Download registration key file")
 
-6. Open the **AzureSiteRecoveryProvider.exe** installer you downloaded a moment ago. On the **Microsoft Update** tab, select **Off** and select **Next**. Accept the default installation location and select **Install**.
+6. Open the **AzureSiteRecoveryProvider.exe** installer you just downloaded. On the **Microsoft Update** tab, select **Off** and select **Next**. Accept the default installation location and select **Install**.
 
     > **Note:** If you are prompted with a pop-up like the latest version of the Provider is installed on this server. Would you like to proceed to registration? select **Yes**. (You can directly jump to the next step in that case.)
   
@@ -119,9 +110,6 @@ In this task, you will register your Hyper-V host(LabVM) with the Migration and 
 
      ![Screenshot of the 'Azure Migrate - Servers' blade showing 6 discovered servers under 'Azure Migrate: Server Migration'.](./Images/upd-newdscvr.png "Discovered servers")
 
-#### Task summary 
-
-In this task, you get an overview of your registered Hyper-V host with the Azure Migrate Server Migration service.
 
 ### Task 3: Enable Replication from Hyper-V to Azure Migrate
 
